@@ -98,6 +98,8 @@
     </div>
 
     <script>
+    var cost_list=[];
+    var frequency_list=[];
       function addSubscription() {
         // Get form values
         const name = document.getElementById("subname").value;
@@ -105,7 +107,26 @@
         const price = document.getElementById("subprice").value;
         const date = document.getElementById("subdate").value;
         const type = document.getElementById("subtype").value;
-
+        cost_list.push(document.getElementById("subprice").value)
+        frequency_list.push(document.getElementById("subrate").value)
+        var count_length = cost_list.length
+        var total_price = 0
+        var monthly_price= 0
+        for (var i = 0; i < count_length; i++){ 
+    
+          if (frequency_list[i] === 'weekly') {
+            total_price = 52*parseInt(cost_list[i]) + total_price;
+          } else if (frequency_list[i] === 'monthly'){
+            total_price = 12*parseInt(cost_list[i]) + total_price;
+          }else{
+            total_price = parseInt(cost_list[i]) + total_price;
+          }
+        }
+        monthly_price= total_price/12
+        weekly_price= total_price/52
+        console.log(total_price)
+        console.log(monthly_price)
+        console.log(weekly_price)
         // Get the specific table body using the table ID
         const tableBody = document.getElementById("subscriptionTable").querySelector("tbody");
 
