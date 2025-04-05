@@ -68,22 +68,39 @@
       </form>
     </div>
     <p class="output" id="output1"></p>
+    <p class="output" id="output2"></p>
+    <p class="output" id="output3"></p>
+    <p class="output" id="output4"></p>
+    <p class="output" id="output5"></p>
     <script>
       const lst1=[""]
+      const lst2=[""]
+      const lst3=[""]
+      const lst4=[""]
+      const lst5=[""]
       const ans1= document.getElementById("subname")
       const ans2= document.getElementById("subtype")
       const ans3= document.getElementById("subprice")
       const ans4= document.getElementById("subdate")
       const ans5= document.getElementById("subdesc")
       const out1=document.getElementById("output1")
-      function funct(lst1){
+      const out2=document.getElementById("output2")
+      const out3=document.getElementById("output3")
+      const out4=document.getElementById("output4")
+      const out5=document.getElementById("output5")
+      
+      function fun1(lst1){
         lst1.push(ans1.value)
-        lst1.push(ans2.value)
-        lst1.push(ans3.value)
-        lst1.push(ans4.value)
-        lst1.push(ans5.value)
+        lst2.push(ans2.value)
+        lst3.push(ans3.value)
+        lst4.push(ans4.value)
+        lst5.push(ans5.value)
         
         out1.innerHTML=lst1;
+        out2.innerHTML=lst2;
+        out3.innerHTML=lst3;
+        out4.innerHTML=lst4;
+        out5.innerHTML=lst5;
       }
       
     </script>
