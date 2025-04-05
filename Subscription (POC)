@@ -17,8 +17,7 @@ class SubscriptionTracker:
     def __init__(self, root):
         self.root = root
         self.root.title("Subscription Tracker")
-        
-     
-root - tk.Tk()
-app = SubscriptionTracker(root)
-root.mainloop()
+
+        # Create the main frame
+        self.frame = tk.Frame(self.root)
+        self.frame.pack(padx=10, pady=10)
