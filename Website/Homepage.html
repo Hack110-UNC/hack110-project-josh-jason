@@ -136,12 +136,21 @@
     var frequency_list=[];
       function addSubscription() {
         // Get form values
-        const name = document.getElementById("subname").value;
+        var name = document.getElementById("subname").value;
+        if (name==="") {
+          name= "n/a";
+        } 
         const rate = document.getElementById("subrate").value;
-        const price = document.getElementById("subprice").value;
-        const date = document.getElementById("subdate").value;
+        var price = document.getElementById("subprice").value;
+        if (price==="") {
+          price = 0;
+        } 
+        var date = document.getElementById("subdate").value;
+        if (date==="") {
+          date= "n/a";
+        } 
         const type = document.getElementById("subtype").value;
-        cost_list.push(document.getElementById("subprice").value)
+        cost_list.push(price)
         frequency_list.push(document.getElementById("subrate").value)
         var count_length = cost_list.length
         var total_price = 0
