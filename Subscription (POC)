@@ -1,0 +1,24 @@
+import tkinter as tk
+from tkinter import messagebox
+import pandas as pd
+
+try: 
+    df =  pd.read_csv('subscriptions.csv') #Looks to see if the file exists, if not, will create a new file
+except Exception as e:
+    data = {
+        "Date": [],
+        "Description": [],
+        "Amount": [],
+        "Type": []
+    }
+    df = pd.DataFrame(data)
+
+class SubscriptionTracker:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Subscription Tracker")
+        
+     
+root - tk.Tk()
+app = SubscriptionTracker(root)
+root.mainloop()
