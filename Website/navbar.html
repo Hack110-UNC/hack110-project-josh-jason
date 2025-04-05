@@ -1,29 +1,125 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="Images/image.png" alt="Sub Check Logo" height="40" class="me-2">
-        Sub Check
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="Homepage.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Subscription Safety.html">Subscription Safety</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="About-Us.html">About Us</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
+<nav class="navbar navbar-expand-lg bg-body-tertiary custom-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="Images/image.png" alt="Sub Check Logo" height="40" class="me-2">
+      <span class="brand-text">Sub Check</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="Homepage.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Subscription Safety.html">Subscription Safety</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="About-Us.html">About Us</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2 search-bar" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success search-btn" type="submit">Search</button>
+      </form>
     </div>
-  </nav>
+  </div>
+</nav>
+
+<style>
+/* Navbar Styling */
+.custom-navbar {
+  background-color: #343a40; /* Dark background */
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-navbar:hover {
+  background-color: #495057; /* Slightly lighter background on hover */
+}
+
+/* Navbar Brand Styling */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000000;
+  text-decoration: none;
+}
+
+.navbar-brand:hover {
+  color: #000000; /* Highlight color for brand */
+}
+
+.brand-text {
+  font-size: 1.25rem;
+  color: #000000;
+  transition: color 0.3s ease;
+}
+
+.brand-text:hover {
+  color: #000000; /* Highlight color for brand text */
+}
+
+/* Navbar Links Styling */
+.nav-link {
+  color: #000000;
+  font-size: 1rem;
+  margin: 0 10px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #000000; /* Highlight color for links */
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #000000; /* Highlight active link */
+}
+
+/* Search Bar Styling */
+.search-bar {
+  border: 2px solid #000000;
+  border-radius: 20px;
+  padding: 5px 15px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar:focus {
+  border-color: #000000;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  outline: none;
+}
+
+.search-btn {
+  color: #000000;
+  border-color: #000000;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: #000000;
+  color: #343a40;
+}
+
+/* Navbar Toggler Styling */
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: 1.2rem;
+    margin: 5px 0;
+  }
+}
+</style>
+
