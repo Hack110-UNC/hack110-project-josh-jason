@@ -38,72 +38,92 @@
     </nav>
 
     <div class="container mt-5">
-      <h1 class="text-center mb-4">Add a Subscription</h1>
-      <form action="/action_page.php" class="subscription-form">
-        <div class="mb-3">
-          <label for="subname" class="form-label">Subscription Name:</label>
-          <input type="text" id="subname" name="subname" class="form-control">
+      <div class="row">
+        <!-- Left Column: Form -->
+        <div class="col-md-6">
+          <h1 class="text-center mb-4">Add a Subscription</h1>
+          <form id="subForm" class="subscription-form" onsubmit="addSubscription(); return false;">
+            <div class="mb-3">
+              <label for="subname" class="form-label">Subscription Name:</label>
+              <input type="text" id="subname" name="subname" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="subrate" class="form-label">Subscription Rate:</label>
+              <select id="subrate" name="subrate" class="form-select">
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="annually">Annually</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="subprice" class="form-label">Subscription Price:</label>
+              <input type="text" id="subprice" name="subprice" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="subdate" class="form-label">Subscription Date:</label>
+              <input type="date" id="subdate" name="subdate" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="subtype" class="form-label">Subscription Type:</label>
+              <select id="subtype" name="subtype" class="form-select">
+                <option value="entertainment">Entertainment</option>
+                <option value="health">Health</option>
+                <option value="productivity">Productivity</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+          </form>
         </div>
-        <div class="mb-3">
-          <label for="subtype" class="form-label">Subscription Type:</label>
-          <select id="subtype" name="subtype" class="form-select">
-            <option value="weekly">Weekly</option>
-            <option value="monthly">Monthly</option>
-            <option value="annually">Annually</option>
-          </select>
+
+        <!-- Right Column: Table -->
+        <div class="col-md-6">
+          <h2 class="text-center mb-4">Your Subscriptions</h2>
+          <table id="subscriptionTable" class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Rate</th>
+                <th>Price</th>
+                <th>Date</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Rows will be added here -->
+            </tbody>
+          </table>
         </div>
-        <div class="mb-3">
-          <label for="subprice" class="form-label">Subscription Price:</label>
-          <input type="text" id="subprice" name="subprice" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="subdate" class="form-label">Subscription Date:</label>
-          <input type="date" id="subdate" name="subdate" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="subdesc" class="form-label">Subscription Description:</label>
-          <textarea id="subdesc" name="subdesc" class="form-control" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary w-100" onclick="fun1(lst1)">Submit</button>
-      </form>
+      </div>
     </div>
-    <p class="output" id="output1"></p>
-    <p class="output" id="output2"></p>
-    <p class="output" id="output3"></p>
-    <p class="output" id="output4"></p>
-    <p class="output" id="output5"></p>
+
     <script>
-      const lst1=[""]
-      const lst2=[""]
-      const lst3=[""]
-      const lst4=[""]
-      const lst5=[""]
-      const ans1= document.getElementById("subname")
-      const ans2= document.getElementById("subtype")
-      const ans3= document.getElementById("subprice")
-      const ans4= document.getElementById("subdate")
-      const ans5= document.getElementById("subdesc")
-      const out1=document.getElementById("output1")
-      const out2=document.getElementById("output2")
-      const out3=document.getElementById("output3")
-      const out4=document.getElementById("output4")
-      const out5=document.getElementById("output5")
-      
-      function fun1(lst1){
-        lst1.push(ans1.value)
-        lst2.push(ans2.value)
-        lst3.push(ans3.value)
-        lst4.push(ans4.value)
-        lst5.push(ans5.value)
-        
-        out1.innerHTML=lst1;
-        out2.innerHTML=lst2;
-        out3.innerHTML=lst3;
-        out4.innerHTML=lst4;
-        out5.innerHTML=lst5;
+      function addSubscription() {
+        // Get form values
+        const name = document.getElementById("subname").value;
+        const rate = document.getElementById("subrate").value;
+        const price = document.getElementById("subprice").value;
+        const date = document.getElementById("subdate").value;
+        const type = document.getElementById("subtype").value;
+
+        // Get the specific table body using the table ID
+        const tableBody = document.getElementById("subscriptionTable").querySelector("tbody");
+
+        // Create a new row and populate its content
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+          <td>${name}</td>
+          <td>${rate}</td>
+          <td>$${price}</td>
+          <td>${date}</td>
+          <td>${type}</td>
+        `;
+
+        // Append the new row to the table
+        tableBody.appendChild(newRow);
+
+        // Reset the form
+        document.getElementById("subForm").reset();
       }
-      
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-ppj6Ih+g6z5K5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-ppj6Ih+g6z5K5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5G5z5
