@@ -1,11 +1,11 @@
-<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sub Check</title>
+    <title>SubCheckr - Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/image.png">
     <style>
       .stat-box {
         width: 200px;
@@ -189,8 +189,6 @@
        document.getElementById('navbar-placeholder').innerHTML = data;
      });
  </script>
-    </a>
-    <link rel="icon" type="images/Jason.jpg" href="images/Jason.jpg">
     <div class="container">
       <div class="row mt-4">
         <!-- Left Column: Form -->
@@ -261,33 +259,33 @@
           <div id="totalPriceBox" class="stat-box">
             <h5>Yearly Price</h5>
             <p id="totalPriceDisplay">$0.00</p>
-            <small id="avgYearlyStat" class="text-muted">Avg: $0.00</small>
           </div>
           <div id="monthlyPriceBox" class="stat-box">
             <h5>Monthly Price</h5>
             <p id="monthlyPriceDisplay">$0.00</p>
-            <small id="avgMonthlyStat" class="text-muted">Avg: $0.00</small>
           </div>
           <div id="weeklyPriceBox" class="stat-box">
             <h5>Weekly Price</h5>
             <p id="weeklyPriceDisplay">$0.00</p>
-            <small id="avgWeeklyStat" class="text-muted">Avg: $0.00</small>
           </div>
         </div>
       </div>
       <div class="row mt-5 justify-content-center align-items-start">
-        <div class="col-md-5 d-flex justify-content-center flex-wrap gap-4">
-          <div class="stat-box" style="width: 150px; height: 150px;">
-            <h6>Avg Yearly</h6>
-            <p id="avgYearlyIcon">$0.00</p>
-          </div>
-          <div class="stat-box" style="width: 150px; height: 150px;">
-            <h6>Avg Monthly</h6>
-            <p id="avgMonthlyIcon">$0.00</p>
-          </div>
-          <div class="stat-box" style="width: 150px; height: 150px;">
-            <h6>Avg Weekly</h6>
-            <p id="avgWeeklyIcon">$0.00</p>
+        <div class="col-md-6">
+          <h3 class="text-center mb-3">Average Subscription Cost</h3>
+          <div class="d-flex justify-content-center flex-wrap gap-4 w-100">
+            <div class="stat-box flex-fill mx-2" style="height: 150px;">
+              <h6>Avg Yearly</h6>
+              <p id="avgYearlyIcon">$0.00</p>
+            </div>
+            <div class="stat-box flex-fill mx-2" style="height: 150px;">
+              <h6>Avg Monthly</h6>
+              <p id="avgMonthlyIcon">$0.00</p>
+            </div>
+            <div class="stat-box flex-fill mx-2" style="height: 150px;">
+              <h6>Avg Weekly</h6>
+              <p id="avgWeeklyIcon">$0.00</p>
+            </div>
           </div>
         </div>
         <div class="col-md-6">
@@ -330,7 +328,7 @@
         const monthly_price = total_price / 12;
         const weekly_price = total_price / 52;
         const avg_price = total_price/cost_list.length
-        const avg_montly_price = (total_price/cost_list.length)/12
+        const avg_monthly_price = (total_price/cost_list.length)/12
         const avg_weekly_price = (total_price/cost_list.length)/52
         // Add new row to the table
         const tableBody = document.getElementById("subscriptionTable").querySelector("tbody");
@@ -353,14 +351,9 @@
         document.getElementById("monthlyPriceDisplay").textContent = `$${monthly_price.toFixed(2)}`;
         document.getElementById("weeklyPriceDisplay").textContent = `$${weekly_price.toFixed(2)}`;
 
-        // Add average values
-        document.getElementById("avgYearlyStat").textContent = `Avg: $${avg_price.toFixed(2)}`;
-        document.getElementById("avgMonthlyStat").textContent = `Avg: $${avg_montly_price.toFixed(2)}`;
-        document.getElementById("avgWeeklyStat").textContent = `Avg: $${avg_weekly_price.toFixed(2)}`;
-
         // Update average icons
         document.getElementById("avgYearlyIcon").textContent = `$${avg_price.toFixed(2)}`;
-        document.getElementById("avgMonthlyIcon").textContent = `$${avg_montly_price.toFixed(2)}`;
+        document.getElementById("avgMonthlyIcon").textContent = `$${avg_monthly_price.toFixed(2)}`;
         document.getElementById("avgWeeklyIcon").textContent = `$${avg_weekly_price.toFixed(2)}`;
 
         // Add animation to statistics
