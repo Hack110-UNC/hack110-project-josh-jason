@@ -158,7 +158,26 @@
       .stat-box p.updated {
         animation: highlightStat 1s ease-out;
       }
+
+      #categoryPieChart svg {
+        transition: transform 0.3s ease;
+      }
+
+      #categoryPieChart:hover svg {
+        transform: scale(1.03);
+      }
+
+      #categoryPieChart text {
+        font-family: 'Arial', sans-serif !important;
+        font-size: 14px !important;
+      }
+
+      .google-visualization-tooltip {
+        border-radius: 8px !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+      }
     </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   </head>
   <body>
  <!-- Navbar -->
@@ -241,14 +260,39 @@
           <div id="totalPriceBox" class="stat-box">
             <h5>Yearly Price</h5>
             <p id="totalPriceDisplay">$0.00</p>
+            <small id="avgYearlyStat" class="text-muted">Avg: $0.00</small>
           </div>
           <div id="monthlyPriceBox" class="stat-box">
             <h5>Monthly Price</h5>
             <p id="monthlyPriceDisplay">$0.00</p>
+            <small id="avgMonthlyStat" class="text-muted">Avg: $0.00</small>
           </div>
           <div id="weeklyPriceBox" class="stat-box">
             <h5>Weekly Price</h5>
             <p id="weeklyPriceDisplay">$0.00</p>
+            <small id="avgWeeklyStat" class="text-muted">Avg: $0.00</small>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5 justify-content-center align-items-start">
+        <div class="col-md-5 d-flex justify-content-center flex-wrap gap-4">
+          <div class="stat-box" style="width: 150px; height: 150px;">
+            <h6>Avg Yearly</h6>
+            <p id="avgYearlyIcon">$0.00</p>
+          </div>
+          <div class="stat-box" style="width: 150px; height: 150px;">
+            <h6>Avg Monthly</h6>
+            <p id="avgMonthlyIcon">$0.00</p>
+          </div>
+          <div class="stat-box" style="width: 150px; height: 150px;">
+            <h6>Avg Weekly</h6>
+            <p id="avgWeeklyIcon">$0.00</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h3 class="text-center mb-3">Subscription Spending by Type</h3>
+          <div class="card p-4 shadow-sm">
+            <div id="categoryPieChart" style="width: 100%; height: 320px; background-color: transparent;"></div>
           </div>
         </div>
       </div>
@@ -269,6 +313,7 @@
         // Update cost and frequency lists
         cost_list.push(price);
         frequency_list.push(rate);
+        updateCategoryTotal(type, price, rate);
 
         // Calculate total, monthly, and weekly prices
         let total_price = 0;
@@ -307,6 +352,16 @@
         document.getElementById("monthlyPriceDisplay").textContent = `$${monthly_price.toFixed(2)}`;
         document.getElementById("weeklyPriceDisplay").textContent = `$${weekly_price.toFixed(2)}`;
 
+        // Add average values
+        document.getElementById("avgYearlyStat").textContent = `Avg: $${avg_price.toFixed(2)}`;
+        document.getElementById("avgMonthlyStat").textContent = `Avg: $${avg_montly_price.toFixed(2)}`;
+        document.getElementById("avgWeeklyStat").textContent = `Avg: $${avg_weekly_price.toFixed(2)}`;
+
+        // Update average icons
+        document.getElementById("avgYearlyIcon").textContent = `$${avg_price.toFixed(2)}`;
+        document.getElementById("avgMonthlyIcon").textContent = `$${avg_montly_price.toFixed(2)}`;
+        document.getElementById("avgWeeklyIcon").textContent = `$${avg_weekly_price.toFixed(2)}`;
+
         // Add animation to statistics
         document.getElementById("totalPriceDisplay").classList.add("updated");
         document.getElementById("monthlyPriceDisplay").classList.add("updated");
@@ -317,6 +372,53 @@
           document.getElementById("monthlyPriceDisplay").classList.remove("updated");
           document.getElementById("weeklyPriceDisplay").classList.remove("updated");
         }, 1000);
+      }
+
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawCategoryChart);
+
+      let categoryTotals = {
+        entertainment: 0,
+        health: 0,
+        productivity: 0,
+        other: 0
+      };
+
+      function drawCategoryChart() {
+        const data = google.visualization.arrayToDataTable([
+          ['Category', 'Annual Spending'],
+          ['Entertainment', categoryTotals.entertainment],
+          ['Health', categoryTotals.health],
+          ['Productivity', categoryTotals.productivity],
+          ['Other', categoryTotals.other]
+        ]);
+
+        const options = {
+          pieHole: 0.4,
+          colors: ['#007bff', '#28a745', '#ffc107', '#6c757d'],
+          pieSliceTextStyle: {
+            color: '#fff'
+          },
+          chartArea: {
+            width: '90%',
+            height: '80%'
+          },
+          legend: {
+            position: 'bottom',
+            textStyle: {fontSize: 14}
+          }
+        };
+
+        const chart = new google.visualization.PieChart(document.getElementById('categoryPieChart'));
+        chart.draw(data, options);
+      }
+
+      function updateCategoryTotal(type, price, rate) {
+        let annualCost = price;
+        if (rate === 'weekly') annualCost *= 52;
+        else if (rate === 'monthly') annualCost *= 12;
+        categoryTotals[type] += annualCost;
+        drawCategoryChart();
       }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
