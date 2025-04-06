@@ -328,7 +328,7 @@
         const monthly_price = total_price / 12;
         const weekly_price = total_price / 52;
         const avg_price = total_price/cost_list.length
-        const avg_montly_price = (total_price/cost_list.length)/12
+        const avg_monthly_price = (total_price/cost_list.length)/12
         const avg_weekly_price = (total_price/cost_list.length)/52
         // Add new row to the table
         const tableBody = document.getElementById("subscriptionTable").querySelector("tbody");
@@ -351,14 +351,9 @@
         document.getElementById("monthlyPriceDisplay").textContent = `$${monthly_price.toFixed(2)}`;
         document.getElementById("weeklyPriceDisplay").textContent = `$${weekly_price.toFixed(2)}`;
 
-        // Add average values
-        document.getElementById("avgYearlyStat").textContent = `Avg: $${avg_price.toFixed(2)}`;
-        document.getElementById("avgMonthlyStat").textContent = `Avg: $${avg_montly_price.toFixed(2)}`;
-        document.getElementById("avgWeeklyStat").textContent = `Avg: $${avg_weekly_price.toFixed(2)}`;
-
         // Update average icons
         document.getElementById("avgYearlyIcon").textContent = `$${avg_price.toFixed(2)}`;
-        document.getElementById("avgMonthlyIcon").textContent = `$${avg_montly_price.toFixed(2)}`;
+        document.getElementById("avgMonthlyIcon").textContent = `$${avg_monthly_price.toFixed(2)}`;
         document.getElementById("avgWeeklyIcon").textContent = `$${avg_weekly_price.toFixed(2)}`;
 
         // Add animation to statistics
